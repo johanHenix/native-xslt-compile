@@ -1,0 +1,9 @@
+{
+  "resources":{
+  "includes":[
+  ]},
+  "bundles":[{
+      "name":"com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages",
+      "classNames":["com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages"]
+    }]
+}

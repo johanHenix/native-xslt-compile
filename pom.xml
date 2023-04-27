@@ -15,7 +15,28 @@
             <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.8.2</version>
+            <scope>test</scope>
+       </dependency>       
     </dependencies>
+
+    <build>
+    <plugins>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.10.1</version>
+          <configuration>
+              <source>11</source>
+              <target>11</target>
+          </configuration>
+      </plugin>
+    </plugins>
+
+    </build>
 
     <profiles>
         <profile>
@@ -39,7 +60,7 @@
                     <plugin>
                         <groupId>org.graalvm.buildtools</groupId>
                         <artifactId>native-maven-plugin</artifactId>
-                        <version>0.9.19</version>
+                        <version>0.9.21</version>
                         <extensions>true</extensions>
                         <executions>
                             <execution>
@@ -59,7 +80,22 @@
                         </executions>
                         <configuration>
                             <buildArgs>
+                                <!-- <arg>-H:ReflectionConfigurationFiles=src/test/resources/reflection-config.json</arg> -->
+                                <arg>-H:ConfigurationFileDirectories=src/test/resources/configuration</arg>
                             </buildArgs>
+                            <jvmArgs>
+                                <arg>--add-exports=java.xml/com.sun.org.apache.xalan.internal.xsltc.runtime=ALL-UNNAMED</arg>
+                                <arg>--add-exports=java.xml/com.sun.org.apache.xml.internal.dtm=ALL-UNNAMED</arg>
+                                <arg>--add-exports=java.xml/com.sun.org.apache.xml.internal.serializer=ALL-UNNAMED</arg>
+                                <arg>--add-exports=java.xml/com.sun.org.apache.xalan.internal.xsltc.dom=ALL-UNNAMED</arg>
+                                <arg>--add-exports=java.xml/com.sun.org.apache.xalan.internal.xsltc=ALL-UNNAMED</arg>
+                            </jvmArgs>
+                            <!-- <agent>
+                                    <enabled>true</enabled>
+                                    <options>
+                                        <enableExperimentalPredefinedClasses>true</enableExperimentalPredefinedClasses>
+                                    </options>
+                            </agent> -->
                         </configuration>
                     </plugin>
                 </plugins>

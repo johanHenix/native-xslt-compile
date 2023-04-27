@@ -6,6 +6,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.xml.transform.Templates;
 
 public class XsltCompileTest {
 
@@ -15,8 +16,10 @@ public class XsltCompileTest {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         StreamSource streamSource = new StreamSource(xsltFileUrl.toExternalForm());
 
-        // this breaks during native-tests
-        tFactory.newTemplates(streamSource);
+        // this used to break during native-tests
+        final Templates templates = tFactory.newTemplates(streamSource);
+        // this now breaks during native-tests
+        templates.newTransformer();
     }
 
     @Test
